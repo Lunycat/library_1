@@ -30,10 +30,9 @@ public class SpringConfigDispatcher extends AbstractAnnotationConfigDispatcherSe
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
-        registerCharacterEncodingFilter(aServletContext);
         aServletContext.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter())
-                .addMappingForServletNames(null, true, "/*");
-
+                .addMappingForUrlPatterns(null, true, "/*");
+        registerCharacterEncodingFilter(aServletContext);
     }
 
     private void registerCharacterEncodingFilter(ServletContext aContext) {

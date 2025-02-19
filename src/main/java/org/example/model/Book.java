@@ -1,20 +1,23 @@
 package org.example.model;
 
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 @Component
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Book {
 
     private Long id;
+
+    @NotNull
     private String title;
+
+    @NotNull
     private String author;
+
+    @NotNull
     private Integer year;
 }

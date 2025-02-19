@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/people")
-public class PeopleController {
+public class PersonController {
 
     private final PersonDao personDao;
 
-    public PeopleController(PersonDao personDao) {
+    public PersonController(PersonDao personDao) {
         this.personDao = personDao;
     }
 
@@ -69,7 +69,7 @@ public class PeopleController {
         }
 
         personDao.update(id, person);
-        return "redirect:people/show";
+        return "redirect:/people/show";
     }
     //------------------------
 

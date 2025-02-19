@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Создание читателя</title>
+    <title>Добавить читателя</title>
 </head>
 <body>
 
@@ -15,7 +15,7 @@
     <input type="number" id="age" th:field="*{age}">
     <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
     <br>
-    <input type="submit" value="Создать!">
+    <input type="submit" value="Создать">
 </form>
 
 </body>
