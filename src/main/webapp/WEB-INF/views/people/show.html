@@ -7,6 +7,13 @@
 <body>
 
 
+<hr>
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.id})}">
+    <input type="submit" value="Редактировать">
+</form>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.id})}">
+    <input type="submit" value="Удалить">
+</form>
 
 </body>
 </html>

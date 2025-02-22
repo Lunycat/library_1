@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.model.Book;
+import org.example.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,6 +36,15 @@ public class BookDao {
     public void update(Long id, Book book) {
         jdbcTemplate.update("UPDATE books SET title = ?, author = ?, year = ? WHERE id = ?",
                 book.getTitle(), book.getAuthor(), book.getYear(), id);
+    }
+
+    public void addReader(Long personId, Long bookId) {
+        jdbcTemplate.update("UPDATE books SET person_id = ? WHERE id = ?",
+                personId, bookId);
+    }
+
+    public void deleteReader(Long id) {
+        jdbcTemplate.update("UPDATE books SET person_id = NULL WHERE id = ?", id);
     }
 
     public void delete(Long id) {

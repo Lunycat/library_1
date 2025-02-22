@@ -12,6 +12,8 @@ public class Book {
 
     private Long id;
 
+    private Long personId;
+
     @NotNull
     private String title;
 
