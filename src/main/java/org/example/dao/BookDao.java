@@ -23,6 +23,11 @@ public class BookDao {
         return jdbcTemplate.query("SELECT * FROM books", new BeanPropertyRowMapper<>(Book.class));
     }
 
+    public List<Book> getOwners(Long personId) {
+        return jdbcTemplate.query("SELECT * FROM books WHERE person_id = ?",
+                new BeanPropertyRowMapper<>(Book.class), personId);
+    }
+
     public Book getBook(Long id) {
         return jdbcTemplate.query("SELECT * FROM books WHERE id = ?",
                 new BeanPropertyRowMapper<>(Book.class), id).stream().findAny().orElse(null);

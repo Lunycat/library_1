@@ -1,7 +1,9 @@
 package org.example.controller;
 
 import jakarta.validation.Valid;
+import org.example.dao.BookDao;
 import org.example.dao.PersonDao;
+import org.example.model.Book;
 import org.example.model.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +16,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/people")
 public class PersonController {
 
     private final PersonDao personDao;
+    private final BookDao bookDao;
 
-    public PersonController(PersonDao personDao) {
+    public PersonController(PersonDao personDao, BookDao bookDao) {
         this.personDao = personDao;
+        this.bookDao = bookDao;
     }
 
     @GetMapping
@@ -30,9 +36,11 @@ public class PersonController {
         return "/people/index";
     }
 
+    // Просмотр читателя
     @GetMapping("/{id}")
     public String show(Model model, @PathVariable Long id) {
         model.addAttribute("person", personDao.getPerson(id));
+        model.addAttribute("books", bookDao.getOwners(id));
         return "people/show";
     }
 
@@ -69,13 +77,14 @@ public class PersonController {
         }
 
         personDao.update(id, person);
-        return "redirect:/people/show";
+        return "redirect:/people/" + id;
     }
     //------------------------
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         personDao.delete(id);
+        bookDao.deleteReader(id);
         return "redirect:/people";
     }
 }
